@@ -20,9 +20,9 @@
 		curl_setopt($c, CURLOPT_POST, true);
 		curl_setopt($c, CURLOPT_POSTFIELDS, $request_parameters);
 		curl_setopt($c, CURLOPT_RETURNTRANSFER, true);		
-		curl_setopt($c, CURLOPT_PROXY, "http://alb-cache.massey.ac.nz:8080");
-		curl_setopt($c, CURLOPT_PROXYPORT, 8080);
-		curl_setopt($c, CURLOPT_PROXYUSERPWD, "04330269:5140");
+//		curl_setopt($c, CURLOPT_PROXY, "http://alb-cache.massey.ac.nz:8080");
+//		curl_setopt($c, CURLOPT_PROXYPORT, 8080);
+//		curl_setopt($c, CURLOPT_PROXYUSERPWD, "04330269:5140");
 		curl_exec($c);
 		$status = curl_getinfo($c, CURLINFO_HTTP_CODE);
 		curl_close($c);
@@ -53,9 +53,9 @@
 		curl_setopt($c, CURLOPT_POST, true);
 		curl_setopt($c, CURLOPT_POSTFIELDS, $request_parameters);
 		curl_setopt($c, CURLOPT_RETURNTRANSFER, true);		
-		curl_setopt($c, CURLOPT_PROXY, "http://alb-cache.massey.ac.nz:8080");
-		curl_setopt($c, CURLOPT_PROXYPORT, 8080);
-		curl_setopt($c, CURLOPT_PROXYUSERPWD, "04330269:5140");
+//		curl_setopt($c, CURLOPT_PROXY, "http://alb-cache.massey.ac.nz:8080");
+//		curl_setopt($c, CURLOPT_PROXYPORT, 8080);
+//		curl_setopt($c, CURLOPT_PROXYUSERPWD, "04330269:5140");
 		curl_exec($c);
 		$status = curl_getinfo($c, CURLINFO_HTTP_CODE);
 		curl_close($c);
@@ -69,7 +69,7 @@
 		} else if($status == 403) {
 		    echo 'Bad username or password';
 		} else {
-		    echo "Status: $status\n";
+		    echo "Status: $status/n";
 		}
  	}
  }

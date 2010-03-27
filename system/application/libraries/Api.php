@@ -21,6 +21,8 @@ class Api {
     			switch($item['type'])
     			{
     				case 'regular':
+    				case 'conversation':
+    				case 'quote':
     					return 'post';
     					break;
     				
@@ -28,16 +30,8 @@ class Api {
     					return 'image';
     					break;
     					
-    				case 'quote':
-    					return 'post';
-    					break;
-    					
     				case 'link':
     					return 'link';
-    					break;
-    					
-    				case 'conversation':
-    					return 'post';
     					break;
     					
     				case 'video':
@@ -100,15 +94,48 @@ class Api {
 	    			$result = $this->CI->tumblr->read('devthing', $credentials['email'], $credentials['password']);
 	    			$i = 0;
 	    			
+	    			$result = new SimpleXMLElement($result);
+	    			
 	    			foreach($result->posts->post as $post)
 	    			{
-	    				$posts[$i]['type']      = (string) $post['type'];
+	    				$posts[$i]['type']      = $this->getType('tumblr', $post);
 	    				$posts[$i]['timestamp'] = (string) $post['unix-timestamp'];
-	    				$posts[$i]['url']       = (string) $post['url'];
+	    				$posts[$i]['source']    = (string) $post['url'];
 	    				
 	    				foreach($post->children() as $key => $value)
 	    				{
-	    					$posts[$i][$key] = (string) $value;
+	    					switch($key)
+	    					{
+	    						case 'photo-caption':
+	    						case 'link-text':
+	    						case 'audio-caption':
+	    						case 'regular-title':
+	    						case 'video-caption':
+	    							$posts[$i]['title'] = (string) $value;
+	    							break;
+	    						
+	    						case 'link-description':
+	    						case 'conversation-text':
+	    						case 'regular-body':
+	    							$posts[$i]['body'] = (string) $value;
+	    							break;
+	    						
+	    						case 'quote-text':
+	    							$posts[$i]['body'] = '"' . (string) $value . '"';
+	    							break;
+	    							
+	    						case 'quote-source':
+	    							$posts[$i]['body'] .= ' &mdash; ' . (string) $value;
+	    							break;
+	    							
+	    						case 'link-url':
+	    							$posts[$i]['source'] = (string) $value;
+	    							break;
+	    							
+	    						case 'video-player':
+	    							$posts[$i]['embed'] = (string) $value;
+	    							break;
+	    					}
 	    				}
 	    				
 	    				$i++;
@@ -118,8 +145,65 @@ class Api {
 	    			break;
 	    		
 	    		case 'write':
-	    			//$CI->tumblr->write();
-	    			return true;
+	    			
+	    			switch($post['type'])
+	    			{
+	    				case 'status':
+	    					$type = 'regular';
+	    					$content['body'] = $post['body'];
+	    					break;
+	    					
+	    				case 'post':
+	    					$type = 'regular';
+	    					if($post['title'] != null)
+	    					{
+	    						$content['title'] = $post['title'];
+	    					}
+	    					$content['body'] = $post['body'];
+	    					break;
+	    					
+	    				case 'link':
+	    					$type = 'link';
+	    					$content['name'] = $post['title'];
+	    					$content['url'] = $post['source'];
+	    					$content['description'] = $post['body'];
+	    					break;
+	    					
+	    				case 'image':
+	    					$type = 'photo';
+	    					$content['source'] = $post['source']; // NOT RIGHT
+	    					$content['caption'] = $post['title'];
+	    					break;
+	    					
+	    				case 'video':
+	    					$type = 'video';
+	    					$content['caption'] = $post['body'];
+	    					$content['embed'] = $post['embed'];
+	    					break;
+	    					
+	    				case 'audio':
+	    					$type = 'audio';
+	    					break;
+	    			}
+	    			
+	    			$return = $this->CI->tumblr->write('devthing', $credentials['email'], $credentials['password'], $type, $content);
+	    			
+	    			$status = $return['status'];
+	    			$result = $return['result'];
+	    			$params = $return['params'];
+	    			
+	    			// Check for success
+	    			if ($status == 201) {
+	    			    echo $status;
+	    			    return true;
+	    			} else if ($status == 403) {
+	    			    echo 'Bad email or password';
+	    			} else {
+	    			    echo "Error: $result\n<br>Status: $status\n" . '<pre>';
+	    			    var_dump($params);
+	    			    echo '</pre>';
+	    			}
+	    			
 	    			break;
 	    	}
 	    }
@@ -203,7 +287,7 @@ class Api {
     function instapaper($method, $credentials, $item = null)
     {
     	$this->CI->load->library('instapaper');
-    	$url = $item['url'];
+    	$url = $item['source'];
     	
     	switch($method)
     	{

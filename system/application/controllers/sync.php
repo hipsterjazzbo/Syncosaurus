@@ -27,15 +27,15 @@ class Sync extends Controller {
 				
 				foreach($items as $item) // Iterate through what was returned
 				{
-					// Normalize type, so we can be intellignt about what we do with things when we send them out to another service
-					$item['type'] = $this->api->getType($source, $item); 
-					
 					// If it's new (created since last sync), and the correct type for the rule
 					if($item['timestamp'] >= $user['last_sync'] && $item['type'] == $rule['type'])
 					{
 						foreach($rule['destinations'] as $destination) // Iterate through destinations
 						{
-							if($this->api->$destination('write', $credentials, $item))
+							$credentials = $user['services'][$destination];
+							$write = $this->api->$destination('write', $credentials, $item);
+							
+							if($write)
 							{
 								echo 'Sent from ' . $source . ' to ' . $destination . '<br />';
 							}
@@ -61,6 +61,9 @@ class Sync extends Controller {
 	{
 		$user = $this->mongo->db->users->findOne(array('username' => 'cfidecaro'));
 		$credentials = $user['services'][$service];
-		$this->api->$service($method, $credentials, $item);
+		$returned = $this->api->$service($method, $credentials, $item);
+		echo '<pre>';
+		var_dump($returned);
+		echo '</pre>';
 	}
 }
