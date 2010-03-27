@@ -186,7 +186,7 @@ class Api {
 	    					break;
 	    			}
 	    			
-	    			$return = $this->CI->tumblr->write('devthing', $credentials['email'], $credentials['password'], $type, $content);
+	    			$return = $this->CI->tumblr->write('devthing.tumblr.com', $credentials['email'], $credentials['password'], $type, $content);
 	    			
 	    			$status = $return['status'];
 	    			$result = $return['result'];

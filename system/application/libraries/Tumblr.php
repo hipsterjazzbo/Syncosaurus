@@ -77,7 +77,9 @@ class Tumblr {
 			'password' => $password,
 			'type' => $type,
 			'send-to-twitter' => 'no',
-			//'group' => $group
+			'group' => $group,
+			'generator' =>'Syncosaur.us',
+			'date' => time()
 		);
 		
 		$request_parameters = array_merge($request_parameters, $content);
