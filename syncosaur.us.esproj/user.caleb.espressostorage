@@ -7,13 +7,13 @@
 	<key>ESProjectWindowState</key>
 	<dict>
 		<key>ContentSize</key>
-		<string>{1276, 700}</string>
+		<string>{1276, 701}</string>
 		<key>ProjectURL</key>
-		<string>file://localhost/Users/caleb/Sites/syncosaur.us/syncosaur.us.esproj/</string>
+		<string>file://localhost/Users/caleb/Sites/__FREELANCE/Syncosaurus/syncosaur.us.esproj/</string>
 		<key>StateType</key>
 		<string>ProjectWindow</string>
 		<key>TopLeftPoint</key>
-		<string>{4, 778}</string>
+		<string>{-225, 894}</string>
 	</dict>
 	<key>com.macrabbit.Espresso.FileManager.DisclosureCollapsed</key>
 	<false/>
@@ -21,10 +21,8 @@
 	<dict>
 		<key>ExpandedURLs</key>
 		<array>
-			<string>file://localhost/Users/caleb/Sites/syncosaur.us/system/application/config</string>
-			<string>file://localhost/Users/caleb/Sites/syncosaur.us/system/application/controllers</string>
-			<string>file://localhost/Users/caleb/Sites/syncosaur.us/system/application/libraries</string>
-			<string>file://localhost/Users/caleb/Sites/syncosaur.us/system/application/views</string>
+			<string>file://localhost/Users/caleb/Sites/__FREELANCE/Syncosaurus/system/application/config</string>
+			<string>file://localhost/Users/caleb/Sites/__FREELANCE/Syncosaurus/system/libraries</string>
 		</array>
 	</dict>
 	<key>com.macrabbit.Espresso.Publisher.DisclosureCollapsed</key>
@@ -35,49 +33,19 @@
 		<array>
 			<dict>
 				<key>DocumentURL</key>
-				<string>file://localhost/Users/caleb/Sites/syncosaur.us/system/application/controllers/rules.php</string>
+				<string>file://localhost/Users/caleb/Sites/syncosaurus/system/application/controllers/sync.php</string>
 				<key>StateType</key>
 				<string>DefaultTab</string>
 			</dict>
 			<dict>
 				<key>DocumentURL</key>
-				<string>file://localhost/Users/caleb/Sites/syncosaur.us/system/application/controllers/sync.php</string>
+				<string>file://localhost/Users/caleb/Sites/syncosaurus/system/application/libraries/Api.php</string>
 				<key>StateType</key>
 				<string>DefaultTab</string>
 			</dict>
 			<dict>
 				<key>DocumentURL</key>
-				<string>file://localhost/Users/caleb/Sites/syncosaur.us/system/application/views/manage_rules.php</string>
-				<key>StateType</key>
-				<string>DefaultTab</string>
-			</dict>
-			<dict>
-				<key>DocumentURL</key>
-				<string>file://localhost/Users/caleb/Sites/syncosaur.us/system/application/config/facebook.php</string>
-				<key>StateType</key>
-				<string>DefaultTab</string>
-			</dict>
-			<dict>
-				<key>DocumentURL</key>
-				<string>file://localhost/Users/caleb/Sites/syncosaur.us/system/application/config/config.php</string>
-				<key>StateType</key>
-				<string>DefaultTab</string>
-			</dict>
-			<dict>
-				<key>DocumentURL</key>
-				<string>file://localhost/Users/caleb/Sites/syncosaur.us/system/application/libraries/Tumblr.php</string>
-				<key>StateType</key>
-				<string>DefaultTab</string>
-			</dict>
-			<dict>
-				<key>DocumentURL</key>
-				<string>file://localhost/Users/caleb/Sites/syncosaur.us/system/application/libraries/Instapaper.php</string>
-				<key>StateType</key>
-				<string>DefaultTab</string>
-			</dict>
-			<dict>
-				<key>DocumentURL</key>
-				<string>file://localhost/Users/caleb/Sites/syncosaur.us/system/application/libraries/Api.php</string>
+				<string>file://localhost/Users/caleb/Sites/syncosaurus/system/libraries/Loader.php</string>
 				<key>StateType</key>
 				<string>DefaultTab</string>
 			</dict>

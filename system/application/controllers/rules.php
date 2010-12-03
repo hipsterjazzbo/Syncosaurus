@@ -3,7 +3,7 @@
 class Rules extends Controller {
 
 	function index()
-    {
+    {        
         $rules = $this->mongo->db->rules->find();
         
         foreach($rules as $rule) 

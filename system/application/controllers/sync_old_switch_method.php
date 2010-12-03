@@ -13,7 +13,7 @@ class Sync extends Controller {
 			if(array_key_exists($source, $user['services'])) // If we have credentials for the service
 			{
 				$credentials = $user['services'][$source];
-				$items = $this->api->$source()->read($credentials); // Read source
+				$items = $this->api->$source('read', $credentials); // Read source
 			}
 			
 			else
